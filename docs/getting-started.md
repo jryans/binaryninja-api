@@ -55,7 +55,7 @@ You can load files in many ways:
 3. Clicking an item in the recent files list
 4. Running Binary Ninja with an optional command-line parameter
 5. Opening a file from a URL via the `⌘-l` or `⌃-l` hotkey
-6. Opening a file using the binaryninja: url handler. For security reasons, the url handler requires you to confirm a warning before opening a file via the url handler. The url handler can open remote URLs like: `binaryninja:https://captf.com/2015/plaidctf/pwnable/datastore_7e64104f876f0aa3f8330a409d9b9924.elf`, or even local files like `binarynina://bin/ls` in cases where you wish to script up Binary Ninja from a local webapp.
+6. Opening a file using the binaryninja: url handler. For security reasons, the url handler requires you to confirm a warning before opening a file via the url handler. The url handler can open remote URLs like: `binaryninja:https://captf2.captf.com/2015/plaidctf/pwnable/datastore_7e64104f876f0aa3f8330a409d9b9924.elf`, or even local files like `binarynina://bin/ls` in cases where you wish to script up Binary Ninja from a local webapp.
 
 ![recent files](/img/recent.png "Recent Files")
 
@@ -257,35 +257,30 @@ On windows, this is achieved through a separate launcher that loads first and re
 
 Settings are stored in the _user_ directory in the file `settings.json`. Each top level object in this file is represents a different plugin.  As of build 860 the following settings are available:
 
-|Plugin     | Setting                  | Type         | Default                                        | Description                                                                                   |
-|----------:|-------------------------:|-------------:|-----------------------------------------------:|:----------------------------------------------------------------------------------------------|
-| analysis  | autorunLinearSweep       | boolean      | True                                           | Automatically run linear sweep when opening a binary for analysis                             |
-| analysis  | enabledUnicodeBlocks     | list(string) | []                                             | Defines which Unicode blocks to consider when searching for strings                           |
-| analysis  | enableUTF8               | boolean      | True                                           | Whether or not to consider UTF-8 code points when searching for strings                       |
-| analysis  | enableUTF16              | boolean      | True                                           | Whether or not to consider UTF-16 code points when searching for strings                      |
-| analysis  | enableUTF32              | boolean      | True                                           | Whether or not to consider UTF-32 code points when searching for strings                      |
-| analysis  | max-function-size        | integer      | 65536                                          | Any functions over this size will not be automatically analyzed and require manual override   |
-| core      | linux\_ca\_bundle        | string       | ""                                             | Certificate authority (.pem or .crt) file to be used for secure downloads                     |
-| core      | linux\_ca\_dir           | string       | ""                                             | Certificate authority directory (for distributions without a CA bundle)                       |
-| ui        | activeContent            | boolean      | True                                           | Allow Binary Ninja to connect to the web to check for updates                                 |
-| ui        | colorblind               | boolean      | True                                           | Choose colors that are visible to those with red/green colorblind                             |
-| ui        | debug                    | boolean      | False                                          | Enable developer debugging features (Additional views: Lifted IL, and SSA forms)              |
-| ui        | recent-file-limit        | integer      | 10                                             | Specify limit for number of recent files                                                      |
-| ui        | scriptingProvider        | string       | "Python"                                       | Specify the registered ScriptingProvider that controls the 'Console' in the UI                |
-| pdb       | local-store-absolute     | string       | ""                                             | Absolute path specifying where the pdb symbol store exists on this machine, overrides relative path |
-| pdb       | local-store-relative     | string       | "symbols"                                      | Path *relative* to the binaryninja _user_ directory, sepcifying the pdb symbol store          |
-| pdb       | auto-download-pdb        | boolean      | True                                           | Automatically download pdb files from specified symbol servers                                |
-| pdb       | symbol-server-list       | list(string) | ["http://msdl.microsoft.com/download/symbols"] | List of servers to query for pdb symbols.                                                     |
-| python    | interpreter              | string       | "python27.{dylib,dll,so.1}"                    | Python interpreter to load if one is not already present when plugins are loaded              |
-| arch    | x86.disassemblyFlavor      | string       | "BN_INTEL"                                     | "BN_INTEL", "INTEL", or "AT&T"              |
-| arch    | x86.disassemblySeperator   | string       | ", "                                           | What to put between operands in disassembly tokens              |
-| arch    | x86.disassemblyLowercase   | bool         | True                                           | Lowercase opcodes, operands, and registers (False for uppercase)              |
-	"arch" :
-	{
-		// "x86.disassemblyFlavor" : "AT&T",
-		// "x86.disassemblyFlavor" : "BN_INTEL",
-		"x86.disassemblyLowercase" : true,
-		"x86.disassemblySeperator" : ", "
+|Plugin     | Setting                  | Type         | Default                                            | Description                                                                                         |
+|----------:|-------------------------:|-------------:|---------------------------------------------------:|:----------------------------------------------------------------------------------------------------|
+| analysis  | autorunLinearSweep       | boolean      | True                                               | Automatically run linear sweep when opening a binary for analysis                                   |
+| analysis  | enabledUnicodeBlocks     | list(string) | []                                                 | Defines which Unicode blocks to consider when searching for strings                                 |
+| analysis  | enableUTF8               | boolean      | True                                               | Whether or not to consider UTF-8 code points when searching for strings                             |
+| analysis  | enableUTF16              | boolean      | True                                               | Whether or not to consider UTF-16 code points when searching for strings                            |
+| analysis  | enableUTF32              | boolean      | True                                               | Whether or not to consider UTF-32 code points when searching for strings                            |
+| analysis  | max-function-size        | integer      | 65536                                              | Any functions over this size will not be automatically analyzed and require manual override         |
+| core      | linux\_ca\_bundle        | string       | ""                                                 | Certificate authority (.pem or .crt) file to be used for secure downloads                           |
+| core      | linux\_ca\_dir           | string       | ""                                                 | Certificate authority directory (for distributions without a CA bundle)                             |
+| ui        | activeContent            | boolean      | True                                               | Allow Binary Ninja to connect to the web to check for updates                                       |
+| ui        | colorblind               | boolean      | True                                               | Choose colors that are visible to those with red/green colorblind                                   |
+| ui        | debug                    | boolean      | False                                              | Enable developer debugging features (Additional views: Lifted IL, and SSA forms)                    |
+| ui        | recent-file-limit        | integer      | 10                                                 | Specify limit for number of recent files                                                            |
+| ui        | scriptingProvider        | string       | "Python"                                           | Specify the registered ScriptingProvider that controls the 'Console' in the UI                      |
+| pdb       | local-store-absolute     | string       | ""                                                 | Absolute path specifying where the pdb symbol store exists on this machine, overrides relative path |
+| pdb       | local-store-relative     | string       | "symbols"                                          | Path *relative* to the binaryninja _user_ directory, sepcifying the pdb symbol store                |
+| pdb       | auto-download-pdb        | boolean      | True                                               | Automatically download pdb files from specified symbol servers                                      |
+| pdb       | symbol-server-list       | list(string) | ["http://msdl.microsoft.com/download/symbols"]     | List of servers to query for pdb symbols.                                                           |
+| python    | interpreter              | string       | "{/path/,C:\\\\Path\\\\}python27.{dylib,dll,so.1}" | Python interpreter to load if one is not already present when plugins are loaded                    |
+| arch      | x86.disassemblyFlavor    | string       | "BN_INTEL"                                         | "BN_INTEL", "INTEL", or "AT&T"                                                                      |
+| arch      | x86.disassemblySeperator | string       | ", "                                               | What to put between operands in disassembly tokens                                                  |
+| arch      | x86.disassemblyLowercase | bool         | True                                               | Lowercase opcodes, operands, and registers (False for uppercase)                                    |
+
 Below is an example `settings.json` setting various options:
 ```
 {
@@ -293,15 +288,19 @@ Below is an example `settings.json` setting various options:
     {
         "activeContent" : false,
         "colorblind" : false,
-        "debug" : true
+        "debug" : true,
         "recent-file-limit" : 10
     }
     "pdb" :
     {
-        "local-store-absolute" : "C:\Symbols",
+        "local-store-absolute" : "C:\\Symbols",
         "local-store-relative" : "",
         "symbol-server-list" : ["http://mysymbolserver.company.lan"]
-    }
+    },
+	"python":
+	{
+		"interpreter": "C:\\Users\\Binja\\AppData\\Local\\Programs\\Python\\Python37\\python37.dll"
+	}
 }
 ```
 
